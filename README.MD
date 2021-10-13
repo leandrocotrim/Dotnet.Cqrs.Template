@@ -4,13 +4,13 @@
 
 ### Installing Template:
 
-To use it in your machine, you need to clone this repository, open a terminal and navigate to the root folder
+- Clone this repository ``git clone https://github.com/gabrielgdc/Dotnet.Cqrs.Template.git``
+- Open a terminal and navigate to the root folder
+- Then you run the command: `dotnet new -i .`
 
-Then you run the command: `dotnet new -i .`
+The above command will add this template in your dotnet-cli under the name of `cqrs`
 
-The command bellow will add this template in your dotnet-cli under the name of `cqrs`
-
-### Use the template to create a project:
+### Using the template to create a project:
 
 Now to start a new project with this template you can use **one of these** bellow commands.
 
