@@ -1,6 +1,8 @@
 # Dotnet CQRS Template
 
-This is a project made using dotnet template creating, you could read about it here [Microsoft Documentation!](https://docs.microsoft.com/pt-br/dotnet/core/tutorials/cli-templates-create-project-template)
+#### This is a project made using dotnet template creating, you could read about it here [Microsoft Documentation!](https://docs.microsoft.com/pt-br/dotnet/core/tutorials/cli-templates-create-project-template)
+
+### Installing Template:
 
 To use it in your machine, you need to clone this repository, open a terminal and navigate to the root folder
 
@@ -8,16 +10,15 @@ Then you run the command: `dotnet new -i .`
 
 The command bellow will add this template in your dotnet-cli under the name of `cqrs`
 
-Now to start a new project with this template you could use bellow  commands.
+### Use the template to create a project:
+
+Now to start a new project with this template you can use **one of these** bellow commands.
 
 ```bash
-dotnet new cqrstemplate --name name.of.your.project
-dotnet new cqrstemplate -o name.of.your.project
+dotnet new cqrs --name name.of.your.project
+dotnet new cqrs -o name.of.your.project
 ```
 
-The first command will create the solution and all the files inside your currently folder.
-
-The second will use the parameter you'll pass to create a folder with that name.
-In both cases the value you'll pass as a parameter will be used as the name of your project folders and resources.
+These commands will create the project with the name passed as argument, the project will be generate with all the folders/layers that are created in the template
 
 
