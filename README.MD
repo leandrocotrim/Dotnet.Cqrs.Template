@@ -3,11 +3,10 @@
 This is a project made using dotnet template creating, you could read about it
 here [Microsoft Documentation!](https://docs.microsoft.com/pt-br/dotnet/core/tutorials/cli-templates-create-project-template)
 
-To use it in your machine, you need to clone this repository, open a terminal and navigate to the following folder:
-`dotnet-cqrs-template`.
+To use it in your machine, you need to clone this repository, open a terminal and navigate to the root folder
 
 Then you run the command:
-`dotnet new -i .\ `
+`dotnet new -i .`
 
 The command bellow will add this template in your dotnet-cli under
 the name of `cqrstemplate`
