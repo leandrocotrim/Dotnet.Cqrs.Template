@@ -5,22 +5,24 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Cqrs.Template.Api.Filters
 {
-	public class GlobalExceptionFilterAttribute : Attribute, IExceptionFilter
-	{
-		public GlobalExceptionFilterAttribute() { }
+    public class GlobalExceptionFilterAttribute : Attribute, IExceptionFilter
+    {
+        public GlobalExceptionFilterAttribute()
+        {
+        }
 
-		public void OnException(ExceptionContext context)
-		{
-			context.Result = new BadRequestObjectResult(
-				new DefaultError(false, 
-					new ErrorsResponse[]
-					{
-						new ErrorsResponse(Environment.GetEnvironmentVariable("GlobalErrorCode"),
-							Environment.GetEnvironmentVariable("GlobalErrorMessage"),
-							DateTime.Now)
-					}
-				)
-			);
-		}
-	}
+        public void OnException(ExceptionContext context)
+        {
+            context.Result = new BadRequestObjectResult(
+                new DefaultError(false,
+                    new[]
+                    {
+                        new ErrorsResponse(Environment.GetEnvironmentVariable("GlobalErrorCode"),
+                            Environment.GetEnvironmentVariable("GlobalErrorMessage"),
+                            DateTime.Now)
+                    }
+                )
+            );
+        }
+    }
 }
