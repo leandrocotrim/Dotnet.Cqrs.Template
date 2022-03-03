@@ -27,10 +27,10 @@ public abstract class CommandHandler
 		}
 	}
 
-	public async Task<bool> Commit()
+	public async Task<bool> CommitAsync()
 	{
 		if (_notifications.HasNotifications()) return false;
-		if (await _uow.Commit()) return true;
+		if (await _uow.CommitAsync()) return true;
 
 		await Bus.Publish(new ExceptionNotification("002", "We had a problem during saving your data."));
 

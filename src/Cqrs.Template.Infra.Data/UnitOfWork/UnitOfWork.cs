@@ -13,7 +13,7 @@ public class UnitOfWork : IUnitOfWork
 		_applicationDbContext = applicationDbContext;
 	}
 
-	public async Task<bool> Commit()
+	public async Task<bool> CommitAsync()
 	{
 		return await _applicationDbContext.SaveEntitiesAsync();
 	}
