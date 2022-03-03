@@ -1,16 +1,15 @@
 using FluentValidation.Results;
 
-namespace Cqrs.Template.Application.Commands
+namespace Cqrs.Template.Application.Commands;
+
+public abstract class Command
 {
-	public abstract class Command
+	protected ValidationResult ValidationResult { get; set; }
+
+	public ValidationResult GetValidationResult()
 	{
-		protected ValidationResult ValidationResult { get; set; }
-
-		public ValidationResult GetValidationResult()
-		{
-			return ValidationResult;
-		}
-
-		public abstract bool IsValid();
+		return ValidationResult;
 	}
+
+	public abstract bool IsValid();
 }

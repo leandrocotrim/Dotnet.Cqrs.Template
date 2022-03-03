@@ -1,7 +1,6 @@
-﻿namespace Cqrs.Template.Application.Behaviour
+﻿namespace Cqrs.Template.Application.Behaviour;
+
+public interface IProvideCacheKey
 {
-    public interface IProvideCacheKey
-    {
-        public string CacheKey { get; set; }
-    }
+    public string CacheKey { get; set; }
 }

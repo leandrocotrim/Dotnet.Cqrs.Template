@@ -4,37 +4,36 @@ using Cqrs.Template.Domain.SeedWork;
 using Cqrs.Template.Domain.Exceptions;
 using Cqrs.Template.Application.Commands;
 
-namespace Cqrs.Template.Application.CommandHandlers
+namespace Cqrs.Template.Application.CommandHandlers;
+
+public abstract class CommandHandler
 {
-	public abstract class CommandHandler
+	private readonly IUnitOfWork _uow;
+	protected readonly IMediator Bus;
+	private readonly ExceptionNotificationHandler _notifications;
+
+	protected CommandHandler(IUnitOfWork uow, IMediator bus, INotificationHandler<ExceptionNotification> notifications)
 	{
-		private readonly IUnitOfWork _uow;
-		protected readonly IMediator Bus;
-		private readonly ExceptionNotificationHandler _notifications;
+		_uow = uow;
+		Bus = bus;
+		_notifications = (ExceptionNotificationHandler)notifications;
+	}
 
-		protected CommandHandler(IUnitOfWork uow, IMediator bus, INotificationHandler<ExceptionNotification> notifications)
+	protected void NotifyValidationErrors(Command message)
+	{
+		foreach (var error in message.GetValidationResult().Errors)
 		{
-			_uow = uow;
-			Bus = bus;
-			_notifications = (ExceptionNotificationHandler)notifications;
+			Bus.Publish(new ExceptionNotification("001", error.ErrorMessage, error.PropertyName));
 		}
+	}
 
-		protected void NotifyValidationErrors(Command message)
-		{
-			foreach (var error in message.GetValidationResult().Errors)
-			{
-				Bus.Publish(new ExceptionNotification("001", error.ErrorMessage, error.PropertyName));
-			}
-		}
+	public async Task<bool> Commit()
+	{
+		if (_notifications.HasNotifications()) return false;
+		if (await _uow.Commit()) return true;
 
-		public async Task<bool> Commit()
-		{
-			if (_notifications.HasNotifications()) return false;
-			if (await _uow.Commit()) return true;
+		await Bus.Publish(new ExceptionNotification("002", "We had a problem during saving your data."));
 
-			await Bus.Publish(new ExceptionNotification("002", "We had a problem during saving your data."));
-
-			return false;
-		}
+		return false;
 	}
 }

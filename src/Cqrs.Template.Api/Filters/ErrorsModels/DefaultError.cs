@@ -1,30 +1,29 @@
 using System;
 
-namespace Cqrs.Template.Api.Filters.ErrorsModels
+namespace Cqrs.Template.Api.Filters.ErrorsModels;
+
+public class DefaultError
 {
-	public class DefaultError
-	{
-		public bool Success { get; set; }
-		public ErrorsResponse[] Errors { get; set; }
+	public bool Success { get; set; }
+	public ErrorsResponse[] Errors { get; set; }
 
-		public DefaultError(bool success, ErrorsResponse[] errors)
-		{
-			Success = success;
-			Errors = errors;
-		}
+	public DefaultError(bool success, ErrorsResponse[] errors)
+	{
+		Success = success;
+		Errors = errors;
 	}
+}
 
-	public class ErrorsResponse
+public class ErrorsResponse
+{
+	public string Code { get; set; }
+	public string Message { get; set; }
+	public DateTime timesTamp { get; set; }
+
+	public ErrorsResponse(string code, string message, DateTime timesTamp)
 	{
-		public string Code { get; set; }
-		public string Message { get; set; }
-		public DateTime timesTamp { get; set; }
-
-		public ErrorsResponse(string code, string message, DateTime timesTamp)
-		{
-			Code = code;
-			Message = message;
-			this.timesTamp = timesTamp;
-		}
+		Code = code;
+		Message = message;
+		this.timesTamp = timesTamp;
 	}
 }

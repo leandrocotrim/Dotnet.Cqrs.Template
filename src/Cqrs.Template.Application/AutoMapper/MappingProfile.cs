@@ -1,9 +1,8 @@
 using AutoMapper;
 
-namespace Cqrs.Template.Application.AutoMapper
+namespace Cqrs.Template.Application.AutoMapper;
+
+public abstract class MappingProfile : Profile
 {
-	public abstract class MappingProfile : Profile
-	{
 		
-	}
 }

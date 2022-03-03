@@ -1,4 +1,3 @@
-namespace Cqrs.Template.Domain.SeedWork
-{
-	public interface IAggregateRoot { }
-}
+namespace Cqrs.Template.Domain.SeedWork;
+
+public interface IAggregateRoot { }
