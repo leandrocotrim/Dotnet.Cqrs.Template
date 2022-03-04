@@ -26,12 +26,12 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseCors(builder =>
+app.UseCors(corsBuilder =>
 {
-    builder.WithOrigins("*");
-    builder.AllowAnyOrigin();
-    builder.AllowAnyMethod();
-    builder.AllowAnyHeader();
+    corsBuilder.WithOrigins("*");
+    corsBuilder.AllowAnyOrigin();
+    corsBuilder.AllowAnyMethod();
+    corsBuilder.AllowAnyHeader();
 });
 
 app.UseRouting();
