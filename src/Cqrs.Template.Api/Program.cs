@@ -1,6 +1,7 @@
 using Cqrs.Template.Api.Filters;
 using Cqrs.Template.Application.CommandHandlers;
 using Cqrs.Template.Infra.CrossCutting.IoC.Configurations;
+using Cqrs.Template.Infra.CrossCutting.IoC.Configurations.HealthCheck;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -18,6 +19,7 @@ builder.Services.AddMediatR(typeof(CommandHandler));
 builder.Services.AddScoped<GlobalExceptionFilterAttribute>();
 builder.Services.AddDatabaseSetup();
 builder.Services.AddControllers();
+builder.Services.AddHealthCheck(builder.Configuration);
 
 var app = builder.Build();
 
@@ -39,6 +41,10 @@ app.UseRouting();
 var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 app.UseSwaggerSetup(apiVersionDescriptionProvider);
 
-app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.UseHealthCheck();
+});
 
 app.Run();
