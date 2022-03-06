@@ -26,7 +26,6 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "GlobalErrorCode": "188",
         "GlobalErrorMessage": "Ocorreu um erro interno ao processar sua requisição",
-        "A__Name": ""
       }
     }
   }
