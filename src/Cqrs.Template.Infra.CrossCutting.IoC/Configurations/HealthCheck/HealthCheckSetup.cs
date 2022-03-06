@@ -1,4 +1,5 @@
-﻿using HealthChecks.UI.Client;
+﻿using Cqrs.Template.Domain.Exceptions;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Routing;
@@ -15,7 +16,6 @@ public static class HealthCheckSetup
         var hcBuilder = services.AddHealthChecks();
 
         hcBuilder.AddCheck("Self Check API", () => HealthCheckResult.Healthy("HealthCheck Working"));
-
         // ADD OTHER CHECKS HERE
     }
 

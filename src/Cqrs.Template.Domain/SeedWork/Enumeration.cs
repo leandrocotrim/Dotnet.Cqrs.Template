@@ -24,7 +24,6 @@ public abstract class Enumeration
         var fields = typeof(T).GetFields(BindingFlags.Public
                                          | BindingFlags.Static | BindingFlags.DeclaredOnly);
 
-
         return fields.Select(f => f.GetValue(null)).Cast<T>();
     }
 
@@ -33,7 +32,7 @@ public abstract class Enumeration
         return Parse<T, int>(value, "value", item => item.Id == value);
     }
 
-    private static T Parse<T, K>(K value, string description, Func<T, bool> predicate) where T : Enumeration
+    private static T Parse<T, TK>(TK value, string description, Func<T, bool> predicate) where T : Enumeration
     {
         return GetAll<T>().FirstOrDefault(predicate);
     }
@@ -50,10 +49,8 @@ public abstract class Enumeration
         return state;
     }
 
-
     public static T FromId<T>(int id) where T : Enumeration
     {
-
         var state = GetAll<T>().SingleOrDefault(s => s.Id == id);
 
         if (state == null)

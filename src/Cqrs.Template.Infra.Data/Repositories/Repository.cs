@@ -6,17 +6,17 @@ namespace Cqrs.Template.Infra.Data.Repositories;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IAggregateRoot
 {
-	protected readonly ApplicationDbContext _applicationDbContext;
-	protected readonly DbSet<TEntity> _dbSet;
+    protected readonly ApplicationDbContext ApplicationDbContext;
+    protected readonly DbSet<TEntity> DbSet;
 
-	public Repository( ApplicationDbContext applicationDbContext)
-	{
-		_applicationDbContext = applicationDbContext;
-		_dbSet = applicationDbContext.Set<TEntity>();
-	}
+    public Repository(ApplicationDbContext applicationDbContext)
+    {
+        ApplicationDbContext = applicationDbContext;
+        DbSet = applicationDbContext.Set<TEntity>();
+    }
 
-	public void Add(TEntity obj)
-	{
-		_applicationDbContext.Add(obj);
-	}
+    public void Add(TEntity obj)
+    {
+        ApplicationDbContext.Add(obj);
+    }
 }
