@@ -8,15 +8,15 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace Cqrs.Template.Application.Behaviour;
+namespace Cqrs.Template.Application.Behaviors;
 
-public class PipelineBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+public class PipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
     private readonly IMemoryCache _cache;
     private readonly IEnumerable<IValidator> _validators;
     private readonly IMediator _bus;
 
-    public PipelineBehaviour(IMemoryCache cache, IEnumerable<IValidator<TRequest>> validators, IMediator bus)
+    public PipelineBehavior(IMemoryCache cache, IEnumerable<IValidator<TRequest>> validators, IMediator bus)
     {
         _cache = cache;
         _validators = validators;
@@ -31,7 +31,7 @@ public class PipelineBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest
         }
 
         if (request is not IProvideCacheKey cacheableRequest) return await next();
-        
+
         var cacheKey = cacheableRequest.CacheKey;
 
         if (_cache.TryGetValue<TResponse>(cacheKey, out var cacheResponse))
@@ -52,7 +52,7 @@ public class PipelineBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest
             .SelectMany(result => result.Errors)
             .Where(f => f != null)
             .ToList();
-            
+
         if (failures.Any())
         {
             foreach(var error in failures)

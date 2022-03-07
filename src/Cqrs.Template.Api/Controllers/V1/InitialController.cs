@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cqrs.Template.Api.Dtos;
 using Cqrs.Template.Domain.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,6 @@ public class InitialController : BaseController
     public Task<IActionResult> Sample()
     {
         var ipsum = new List<string> { "Nothing", "Here", "Just", "Hello" };
-
-        return Task.FromResult(Response(Ok(new { ipsum })));
+        return Task.FromResult(Response(Ok(new Response<object>(ipsum))));
     }
 }

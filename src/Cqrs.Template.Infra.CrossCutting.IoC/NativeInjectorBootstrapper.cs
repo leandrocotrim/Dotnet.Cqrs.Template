@@ -1,5 +1,5 @@
 ﻿using System;
-using Cqrs.Template.Application.Behaviour;
+using Cqrs.Template.Application.Behaviors;
 using Cqrs.Template.Domain.Exceptions;
 using FluentValidation;
 using MediatR;
@@ -26,13 +26,13 @@ public static class NativeInjectorBootstrapper
 	{
 		const string applicationAssemblyName = "Cqrs.Template.Application"; // use your project name
 		var assembly = AppDomain.CurrentDomain.Load(applicationAssemblyName);
-			
+
 		AssemblyScanner
 			.FindValidatorsInAssembly(assembly)
 			.ForEach(result => services.AddScoped(result.InterfaceType, result.ValidatorType));
-			
+
 		// injection for Mediator
-		services.AddScoped(typeof(IPipelineBehavior<,>), typeof(PipelineBehaviour<,>));
+		services.AddScoped(typeof(IPipelineBehavior<,>), typeof(PipelineBehavior<,>));
 		services.AddScoped<INotificationHandler<ExceptionNotification>, ExceptionNotificationHandler>();
 	}
 }

@@ -1,4 +1,4 @@
-﻿namespace Cqrs.Template.Application.Behaviour;
+﻿namespace Cqrs.Template.Application.Behaviors;
 
 public interface IProvideCacheKey
 {

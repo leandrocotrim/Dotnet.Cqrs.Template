@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cqrs.Template.Api.Dtos;
 using Cqrs.Template.Api.Filters;
 using Cqrs.Template.Domain.Exceptions;
 using MediatR;
@@ -10,34 +11,29 @@ namespace Cqrs.Template.Api.Controllers;
 [ServiceFilter(typeof(GlobalExceptionFilterAttribute))]
 public class BaseController : Controller
 {
-	private readonly ExceptionNotificationHandler _notifications;
+    private readonly ExceptionNotificationHandler _notifications;
 
-	protected IEnumerable<ExceptionNotification> Notifications => _notifications.GetNotifications();
+    protected IEnumerable<ExceptionNotification> Notifications => _notifications.GetNotifications();
 
-	protected BaseController(INotificationHandler<ExceptionNotification> notifications)
-	{
-		_notifications = (ExceptionNotificationHandler) notifications;
-	}
+    protected BaseController(INotificationHandler<ExceptionNotification> notifications)
+    {
+        _notifications = (ExceptionNotificationHandler)notifications;
+    }
 
-	protected bool IsValidOperation()
-	{
-		return (!_notifications.HasNotifications());
-	}
+    protected bool IsValidOperation()
+    {
+        return !_notifications.HasNotifications();
+    }
 
-	protected new IActionResult Response(IActionResult action)
-	{
-		if (IsValidOperation())
-		{
-			return action;
-		}
+    protected new IActionResult Response(IActionResult action)
+    {
+        if (!IsValidOperation())
+        {
+            return BadRequest(new Response<object>(
+                _notifications.GetNotifications())
+            );
+        }
 
-		return BadRequest
-		(
-			new
-			{
-				success = false,
-				errors = _notifications.GetNotifications()
-			}
-		);
-	}
+        return action;
+    }
 }
