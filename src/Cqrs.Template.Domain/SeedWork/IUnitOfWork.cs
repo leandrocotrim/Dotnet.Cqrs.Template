@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace Cqrs.Template.Domain.SeedWork
+namespace Cqrs.Template.Domain.SeedWork;
+
+public interface IUnitOfWork
 {
-	public interface IUnitOfWork
-	{
-		Task<bool> Commit();
-	}
+	Task<bool> CommitAsync();
 }

@@ -1,15 +1,14 @@
 using System;
 using MediatR;
 
-namespace Cqrs.Template.Domain.Events
-{
-	public class Event : INotification
-	{
-		public DateTime Timestamp { get; }
+namespace Cqrs.Template.Domain.Events;
 
-		protected Event()
-		{
-			Timestamp = DateTime.UtcNow;
-		}
+public class Event : INotification
+{
+	public DateTime Timestamp { get; }
+
+	protected Event()
+	{
+		Timestamp = DateTime.UtcNow;
 	}
 }

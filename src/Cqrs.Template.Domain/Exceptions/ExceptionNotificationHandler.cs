@@ -4,37 +4,36 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace Cqrs.Template.Domain.Exceptions
+namespace Cqrs.Template.Domain.Exceptions;
+
+public class ExceptionNotificationHandler : INotificationHandler<ExceptionNotification>
 {
-	public class ExceptionNotificationHandler : INotificationHandler<ExceptionNotification>
+	private List<ExceptionNotification> _notifications;
+		
+	public ExceptionNotificationHandler()
 	{
-		private List<ExceptionNotification> _notifications;
+		_notifications = new List<ExceptionNotification>();
+	}
 		
-		public ExceptionNotificationHandler()
-		{
-			_notifications = new List<ExceptionNotification>();
-		}
-		
-		public Task Handle(ExceptionNotification message, CancellationToken cancellationToken)
-		{
-			_notifications.Add(message);
+	public Task Handle(ExceptionNotification message, CancellationToken cancellationToken)
+	{
+		_notifications.Add(message);
 			
-			return Task.CompletedTask;
-		}
+		return Task.CompletedTask;
+	}
 
-		public virtual List<ExceptionNotification> GetNotifications()
-		{
-			return _notifications;
-		}
+	public virtual List<ExceptionNotification> GetNotifications()
+	{
+		return _notifications;
+	}
 
-		public virtual bool HasNotifications()
-		{
-			return GetNotifications().Any();
-		}
+	public virtual bool HasNotifications()
+	{
+		return GetNotifications().Any();
+	}
 
-		public void Dispose()
-		{
-			_notifications = new List<ExceptionNotification>();
-		}
+	public void Dispose()
+	{
+		_notifications = new List<ExceptionNotification>();
 	}
 }

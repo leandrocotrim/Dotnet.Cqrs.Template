@@ -17,7 +17,7 @@
   "exclude": [
     "*.idea"
   ],
-  "shortName": "cqrs",
+  "shortName": "cqrs.ddd.template",
   "sourceName": "Cqrs.Template",
   "guids": [
     "1c9f0454-0566-4070-9737-c6719aeb573c",

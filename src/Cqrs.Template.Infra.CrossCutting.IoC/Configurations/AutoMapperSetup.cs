@@ -1,16 +1,15 @@
 using System;
-using Cqrs.Template.Application.AutoMapper;
+using Cqrs.Template.Application.Mapper;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Cqrs.Template.Infra.CrossCutting.IoC.Configurations
-{
-	public static class AutoMapperSetup
-	{
-		public static void AddAutoMapper(this IServiceCollection services)
-		{
-			if (services == null) throw new ArgumentNullException(nameof(services));
+namespace Cqrs.Template.Infra.CrossCutting.IoC.Configurations;
 
-			services.AddAutoMapper(typeof(MappingProfile));
-		}
+public static class AutoMapperSetup
+{
+	public static void AddAutoMapper(this IServiceCollection services)
+	{
+		if (services == null) throw new ArgumentNullException(nameof(services));
+
+		services.AddAutoMapper(typeof(MappingProfile));
 	}
 }
