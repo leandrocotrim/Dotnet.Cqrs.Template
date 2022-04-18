@@ -22,3 +22,4 @@ dotnet new cqrs.ddd.template -o name.of.your.project
 These commands will create the project with the name passed as argument, the project will be generate with all the folders/layers that are created in the template
 
 
+Show sample in https://github.com/dotnet-architecture/eShopOnContainers
